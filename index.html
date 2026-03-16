@@ -3,16 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Toggle Switch</title>
+  <title>Toggle Switch & Dark Mode</title>
   
   <style>
-    /* Add some basic padding to the body so the switch isn't stuck in the corner */
+    /* 1. NEW: Added transition for a smooth fade to dark mode */
     body {
       padding: 50px;
       font-family: sans-serif;
+      background-color: white;
+      color: black;
+      transition: background-color 0.4s, color 0.4s; 
     }
 
-    /* The switch container */
+    /* 2. NEW: The dark mode styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    /* --- The Switch CSS (Unchanged) --- */
     .switch {
       position: relative;
       display: inline-block;
@@ -20,14 +29,12 @@
       height: 34px;
     }
 
-    /* Hide default HTML checkbox */
     .switch input {
       opacity: 0;
       width: 0;
       height: 0;
     }
 
-    /* The slider track */
     .slider {
       position: absolute;
       cursor: pointer;
@@ -37,10 +44,9 @@
       bottom: 0;
       background-color: #ccc;
       transition: 0.4s;
-      border-radius: 34px; /* Makes the track round */
+      border-radius: 34px; 
     }
 
-    /* The knob inside the slider */
     .slider:before {
       position: absolute;
       content: "";
@@ -50,20 +56,17 @@
       bottom: 4px;
       background-color: white;
       transition: 0.4s;
-      border-radius: 50%; /* Makes the knob round */
+      border-radius: 50%; 
     }
 
-    /* Change background color when checked */
     input:checked + .slider {
-      background-color: #2196F3; /* A nice blue color */
+      background-color: #2196F3; 
     }
 
-    /* Move the knob to the right when checked */
     input:checked + .slider:before {
       transform: translateX(26px);
     }
 
-    /* Optional: Add a subtle shadow when focused for accessibility */
     input:focus + .slider {
       box-shadow: 0 0 1px #2196F3;
     }
@@ -71,10 +74,30 @@
 </head>
 <body>
 
+  <h2>Standard Toggle</h2>
   <label class="switch">
     <input type="checkbox" id="myToggle">
     <span class="slider"></span>
   </label>
+
+  <br><br>
+
+  <h2>Dark Mode Toggle</h2>
+  <label class="switch">
+    <input type="checkbox" id="darkModeToggle">
+    <span class="slider"></span>
+  </label>
+
+  <script>
+    // Grab the dark mode toggle switch by its ID
+    const themeSwitch = document.getElementById('darkModeToggle');
+
+    // Listen for when it gets checked or unchecked
+    themeSwitch.addEventListener('change', function() {
+      // Toggle the 'dark-mode' class on the body on or off
+      document.body.classList.toggle('dark-mode');
+    });
+  </script>
 
 </body>
 </html>
